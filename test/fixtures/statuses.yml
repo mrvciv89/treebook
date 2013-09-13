@@ -1,6 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 one:
   content: MyText
+  user: merve
 
 two:
   content: MyText
+  user: merve
