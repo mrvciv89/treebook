@@ -1,5 +1,11 @@
-merve:
-  first_name: "Merve"
-  last_name: "Civelek"
-  email: "mrvcivelek@hotmail.com"
-  profile_name: "mrvciv"
+jason:
+  first_name: "Jason"
+  last_name: "Seifer"
+  email: "jason@teamtreehouse.com"
+  profile_name: "jasonseifer"
+
+jim:
+  first_name: "Jim"
+  last_name: "Hoskins"
+  email: "jim@teamtreehouse.com"
+  profile_name: "jimhoskins"
