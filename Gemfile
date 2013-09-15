@@ -6,6 +6,10 @@ gem 'devise'
 gem 'simple_form'
 gem 'heroku'
 
+group :test do
+	gem 'shoulda'
+end
+
 group :production do
 	gem 'pg'
 end
