@@ -3,13 +3,14 @@
 	<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {class: "well"}) do |f| %>
 
 		<fieldset>
-	  		<legend>Sign In</legend>
-	  <%= f.input :email %>
-	  <%= f.input :password %>
+			<legend>Sign In</legend>	  
+		<%= f.input :email %>
+		<%= f.input :password %>
+
 
 	  <% if devise_mapping.rememberable? -%>
 	    <div><%= f.input :remember_me, as: :boolean %></div>
-	  <% end %>
+	  <% end -%>
 
 	  <div><%= f.button :submit, "Sign in" %></div>
 	</fieldset>
@@ -19,6 +20,6 @@
 	</div>
 
 	<div class="span8">
-		<h2>Signing in is easy and secure!</h2>
+		<h2>Signing in is easy and secure</h2>
 	</div>
 </div>
