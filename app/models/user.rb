@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-  								:first_name, :last_name, :profile_name
+                  :first_name, :last_name, :profile_name
   # attr_accessible :title, :body
 
 
@@ -33,8 +33,27 @@ has_many :statuses
 
   has_many :pending_friends, through: :pending_user_friendships, source: :friend
 
+  has_many :requested_user_friendships, class_name: 'UserFriendship',
+                                      foreign_key: :user_id,
+                                      conditions: { state: 'requested'}
+
+  has_many :requested_friends, through: :requested_user_friendships, source: :friend
+
+  has_many :blocked_user_friendships, class_name: 'UserFriendship',
+                                      foreign_key: :user_id,
+                                      conditions: { state: 'blocked' }
+  has_many :blocked_friends, through: :blocked_user_friendships, source: :friend
+
+  has_many :accepted_user_friendships, class_name: 'UserFriendship',
+                                      foreign_key: :user_id,
+                                      conditions: { state: 'accepted' }
+  has_many :accepted_friends, through: :accepted_user_friendships, source: :friend
+
+
+
+
   def full_name
-  	first_name + " " + last_name
+    first_name + " " + last_name
   end
 
   def to_param
@@ -48,4 +67,9 @@ has_many :statuses
 
     "http://gravatar.com/avatar/#{hash}"
   end
+
+  def has_blocked?(other_user)
+    blocked_friends.include?(other_user)
+  end
 end
+

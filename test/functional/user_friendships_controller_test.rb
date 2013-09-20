@@ -13,7 +13,9 @@ class UserFriendshipsControllerTest < ActionController::TestCase
       setup do
         @friendship1 = create(:pending_user_friendship, user: users(:jason), friend: create(:user, first_name: 'Pending', last_name: 'Friend'))
         @friendship2 = create(:accepted_user_friendship, user: users(:jason), friend: create(:user, first_name: 'Active', last_name: 'Friend'))
-                
+        @friendship3 = create(:requested_user_friendship, user: users(:jason), friend: create(:user, first_name: 'Requested', last_name: 'Friend'))
+        @friendship4 = user_friendships(:blocked_by_jason)
+
         sign_in users(:jason)
         get :index
       end
@@ -42,6 +44,83 @@ class UserFriendshipsControllerTest < ActionController::TestCase
           assert_select "em", "Friendship started #{@friendship2.updated_at}."
         end
       end
+
+      context "blocked users" do
+        setup do
+          get :index, list: 'blocked'
+        end
+
+        should "get the index without error" do
+          assert_response :success
+        end
+
+        should "not display pending or active friend's names" do
+          assert_no_match /Pending\ Friend/, response.body
+          assert_no_match /Active\ Friend/, response.body
+        end
+
+        should "display blocked friend names" do
+          assert_match /Blocked\ Friend/, response.body
+        end
+      end
+
+      context "pending friendships" do
+        setup do
+          get :index, list: 'pending'
+        end
+
+        should "get the index without error" do
+          assert_response :success
+        end
+
+        should "not display pending or active friend's names" do
+          assert_no_match /Blocked/, response.body
+          assert_no_match /Active/, response.body
+        end
+
+        should "display blocked friends" do
+          assert_match /Pending/, response.body
+        end
+      end
+
+      context "requested friendships" do
+        setup do
+          get :index, list: 'requested'
+        end
+
+        should "get the index without error" do
+          assert_response :success
+        end
+
+        should "not display pending or active friend's names" do
+          assert_no_match /Blocked/, response.body
+          assert_no_match /Active/, response.body
+        end
+
+        should "display requested friends" do
+          assert_match /Requested/, response.body
+        end
+      end
+
+      context "accepted friendships" do
+        setup do
+          get :index, list: 'accepted'
+        end
+
+        should "get the index without error" do
+          assert_response :success
+        end
+
+        should "not display pending or active friend's names" do
+          assert_no_match /Blocked/, response.body
+          assert_no_match /Requested/, response.body
+        end
+
+        should "display requested friends" do
+          assert_match /Active/, response.body
+        end
+      end
+
 
     end
   end  
@@ -132,7 +211,7 @@ class UserFriendshipsControllerTest < ActionController::TestCase
       context "successfully" do
         should "create two user friendship objects" do
           assert_difference 'UserFriendship.count', 2 do
-            post :create, user_friendship: { friend_id: users(:mike).profile_name}
+            post :create, user_friendship: { friend_id: users(:mike).profile_name }
           end
         end
       end
@@ -198,13 +277,13 @@ class UserFriendshipsControllerTest < ActionController::TestCase
         assert_equal 'accepted', @user_friendship.state
       end
 
-       should "have a flash success message" do
+      should "have a flash success message" do
         assert_equal "You are now friends with #{@user_friendship.friend.first_name}", flash[:success]
       end
     end
   end
 
-   context "#edit" do
+  context "#edit" do
     context "when not logged in" do
       should "redirect to the login page" do
         get :edit, id: 1
@@ -216,7 +295,7 @@ class UserFriendshipsControllerTest < ActionController::TestCase
       setup do
         @user_friendship = create(:pending_user_friendship, user: users(:jason))
         sign_in users(:jason)
-        get :edit, id: @user_friendship
+        get :edit, id: @user_friendship.friend.profile_name
       end
 
       should "get edit and return success" do
@@ -227,14 +306,13 @@ class UserFriendshipsControllerTest < ActionController::TestCase
         assert assigns(:user_friendship)
       end
 
-
       should "assign to friend" do
         assert assigns(:friend)
       end
     end
   end
 
-context "#destroy" do
+  context "#destroy" do
     context "when not logged in" do
       should "redirect to the login page" do
         delete :destroy, id: 1
@@ -250,10 +328,48 @@ context "#destroy" do
         create(:accepted_user_friendship, friend: users(:jason), user: @friend)
 
         sign_in users(:jason)
+      end
+
+      should "delete user friendships" do
+        assert_difference 'UserFriendship.count', -2 do
+          delete :destroy, id: @user_friendship
+        end
+      end
+
+      should "set the flash" do
         delete :destroy, id: @user_friendship
-        @user_friendship.reload
+        assert_equal "Friendship destroyed", flash[:success]
       end
     end
   end
+
+  context "#block" do
+    context "when not logged in" do
+      should 'redirect to the login page' do
+        put :block, id: 1
+        assert_response :redirect
+        assert_redirected_to login_path
+      end
+    end
+
+    context "when logged in" do
+      setup do
+        @user_friendship = create(:pending_user_friendship, user: users(:jason))
+        sign_in users(:jason)
+        put :block, id: @user_friendship
+        @user_friendship.reload
+      end
+
+      should "assign a user friendship" do
+        assert assigns(:user_friendship)
+        assert_equal @user_friendship, assigns(:user_friendship)
+      end
+
+      should "update the user friendship state to blocked" do
+        assert_equal 'blocked', @user_friendship.state
+      end
+    end
+  end
+
 
 end

@@ -124,4 +124,30 @@ class UserFriendshipTest < ActiveSupport::TestCase
     setup do
       UserFriendship.request users(:jason), users(:jim)
       @friendship1 = users(:jason).user_friendships.where(friend_id: users(:jim).id).first
-      @friendship2 = users(:jim).user_friendships.where(friend_id: users(:jason).id).fi
+      @friendship2 = users(:jim).user_friendships.where(friend_id: users(:jason).id).first
+    end
+
+    should "delete the mutual friendship" do
+      @friendship1.destroy
+      assert !UserFriendship.exists?(@friendship2.id)
+    end
+  end
+
+  context "#block!" do
+    setup do
+      @user_friendship = UserFriendship.request users(:jason), users(:mike)
+    end
+
+    should "set the state to blocked" do
+      @user_friendship.block!
+      assert_equal 'blocked', @user_friendship.state
+      assert_equal 'blocked', @user_friendship.mutual_friendship.state
+    end
+
+    should "not allow new requests once blocked" do
+      @user_friendship.block!
+      uf = UserFriendship.request users(:jason), users(:mike)
+      assert !uf.save
+    end
+  end
+end

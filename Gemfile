@@ -6,6 +6,8 @@ gem 'devise'
 gem 'simple_form'
 gem 'heroku'
 gem 'state_machine'
+gem 'draper', '~> 1.0'
+gem 'js-routes'
 
 group :test do
 	gem 'shoulda'

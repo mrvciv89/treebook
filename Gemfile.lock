@@ -44,6 +44,10 @@ GEM
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       warden (~> 1.2.3)
+    draper (1.2.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0.3)
     erubis (2.7.0)
     excon (0.25.3)
     execjs (2.0.1)
@@ -66,6 +70,8 @@ GEM
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    js-routes (0.9.3)
+      rails (>= 3.2)
     json (1.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
@@ -76,7 +82,6 @@ GEM
     multi_json (1.8.0)
     netrc (0.7.7)
     orm_adapter (0.4.0)
-    pg (0.14.1)
     pg (0.14.1-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -104,6 +109,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    request_store (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rubyzip (1.0.0)
@@ -146,9 +152,11 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
+  draper (~> 1.0)
   factory_girl_rails
   heroku
   jquery-rails
+  js-routes
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
