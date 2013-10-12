@@ -45,12 +45,32 @@ aside,
 details,
 figcaption,
 figure,
-footer,
+.footer {
+  position: relative;
+  margin-top: 10px; /* negative value of footer height */
+  margin-bottom: 1px;
+  height: 30px;
+  width: 755px;
+  clear:both;
+  padding: 10px 0;
+  background-color: #e7e7e7;
+} 
+
+.footer p {
+  color: blue;  
+  font:12px;
+}
+
+
 header,
 hgroup,
 nav,
 section {
   display: block;
+}
+
+section:hover {
+  background: #d9d9d9;
 }
 
 audio,
@@ -632,6 +652,7 @@ a:focus {
 }
 
 .container-fluid {
+  background: #f5f5f5;
   padding-right: 20px;
   padding-left: 20px;
   *zoom: 1;
@@ -805,8 +826,13 @@ h4 small {
 
 .page-header {
   padding-bottom: 9px;
-  margin: 20px 0 30px;
+  margin: 5px 0 5px;
   border-bottom: 1px solid #eeeeee;
+}
+
+  
+.p a:hover {
+  text-decoration: none;
 }
 
 ul,
@@ -1253,8 +1279,10 @@ textarea::-webkit-input-placeholder {
 
 .radio,
 .checkbox {
+  display: inline-block;
   min-height: 20px;
   padding-left: 20px;
+  padding-right: 20px;
 }
 
 .radio input[type="radio"],
@@ -3448,6 +3476,8 @@ input[type="button"].btn-block {
 }
 
 .btn-success {
+  margin-top: 20px;
+  margin-bottom: 10px;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #5bb75b;
@@ -3947,7 +3977,7 @@ input[type="submit"].btn.btn-mini {
   display: block;
 }
 
-.nav > li > a:hover,
+.nav > li > a:hover ,
 .nav > li > a:focus {
   text-decoration: none;
   background-color: #eeeeee;
@@ -3961,6 +3991,7 @@ input[type="submit"].btn.btn-mini {
   float: right;
 }
 
+
 .nav-header {
   display: block;
   padding: 3px 15px;
@@ -3969,7 +4000,7 @@ input[type="submit"].btn.btn-mini {
   line-height: 20px;
   color: #999999;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 
 .nav li + .nav-header {
@@ -4005,6 +4036,7 @@ input[type="submit"].btn.btn-mini {
 .nav-list [class*=" icon-"] {
   margin-right: 2px;
 }
+
 
 .nav-list .divider {
   *width: 100%;
@@ -4358,13 +4390,14 @@ input[type="submit"].btn.btn-mini {
   *z-index: 2;
   margin-bottom: 20px;
   overflow: visible;
+  background-color: #353e45;
 }
 
 .navbar-inner {
   min-height: 40px;
   padding-right: 20px;
   padding-left: 20px;
-  background-color: #fafafa;
+  background-color: #353e45;
   background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
   background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
@@ -4382,7 +4415,7 @@ input[type="submit"].btn.btn-mini {
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
 
-.navbar-inner:before,
+.navbar-inner:before ,
 .navbar-inner:after {
   display: table;
   line-height: 0;
@@ -4391,10 +4424,12 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-inner:after {
   clear: both;
+  background-color: #353e45;
 }
 
 .navbar .container {
   width: auto;
+  background-color: #353e45;
 }
 
 .nav-collapse.collapse {
@@ -4403,14 +4438,17 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar .brand {
+  background-color: #353e45;
   display: block;
   float: left;
   padding: 10px 20px 10px;
   margin-left: -20px;
+  padding-left: 20px;
   font-size: 20px;
   font-weight: 200;
-  color: #777777;
-  text-shadow: 0 1px 0 #ffffff;
+  color: white;
+  height: 27px;
+  /* background-image: url("http://www.allstarlikes.com/wp-content/uploads/2013/10/Treebook10.png"); */
 }
 
 .navbar .brand:hover,
@@ -4421,16 +4459,18 @@ input[type="submit"].btn.btn-mini {
 .navbar-text {
   margin-bottom: 0;
   line-height: 40px;
-  color: #777777;
+  color: white;
 }
 
 .navbar-link {
-  color: #777777;
+  color: white;
 }
 
-.navbar-link:hover,
+.navbar-link:hover {
+  color: white;
+  },
 .navbar-link:focus {
-  color: #333333;
+  color: white;
 }
 
 .navbar .divider-vertical {
@@ -4539,14 +4579,12 @@ input[type="submit"].btn.btn-mini {
   margin-bottom: 0;
 }
 
-.navbar-fixed-top .navbar-inner,
+.navbar-fixed-top .navbar-inner 
 .navbar-static-top .navbar-inner {
   border-width: 0 0 1px;
 }
 
-.navbar-fixed-bottom .navbar-inner {
-  border-width: 1px 0 0;
-}
+.navbar-fixed-bottom .navbar-inner
 
 .navbar-fixed-top .navbar-inner,
 .navbar-fixed-bottom .navbar-inner {
@@ -4558,13 +4596,17 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar-static-top .container,
-.navbar-fixed-top .container,
+.navbar-fixed-top .container {
+  border-width: 1px 0 0;
+  height: 47px;
+},
 .navbar-fixed-bottom .container {
   width: 940px;
 }
 
 .navbar-fixed-top {
   top: 0;
+  width: 1030px;
 }
 
 .navbar-fixed-top .navbar-inner,
@@ -4572,6 +4614,10 @@ input[type="submit"].btn.btn-mini {
   -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
      -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
           box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-fixed-top.nav > ul {
+  background-color: blue;
 }
 
 .navbar-fixed-bottom {
@@ -4590,6 +4636,7 @@ input[type="submit"].btn.btn-mini {
   display: block;
   float: left;
   margin: 0 10px 0 0;
+
 }
 
 .navbar .nav.pull-right {
@@ -4604,9 +4651,9 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a {
   float: none;
   padding: 10px 15px 10px;
-  color: #777777;
+  color: #fbfbfb;
   text-decoration: none;
-  text-shadow: 0 1px 0 #ffffff;
+  color: white;
 }
 
 .navbar .nav .dropdown-toggle .caret {
@@ -4615,7 +4662,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
-  color: #333333;
+  color: #ccd0d4;
   text-decoration: none;
   background-color: transparent;
 }
@@ -4676,7 +4723,7 @@ input[type="submit"].btn.btn-mini {
   display: block;
   width: 18px;
   height: 2px;
-  background-color: #f5f5f5;
+  background-color: #353e45;
   -webkit-border-radius: 1px;
      -moz-border-radius: 1px;
           border-radius: 1px;
@@ -4996,7 +5043,9 @@ input[type="submit"].btn.btn-mini {
   border-left-width: 0;
 }
 
-.pagination ul > li > a:hover,
+.pagination ul > li > a:hover {
+  color: #5a5a5a;
+  },
 .pagination ul > li > a:focus,
 .pagination ul > .active > a,
 .pagination ul > .active > span {
@@ -5603,7 +5652,9 @@ a.thumbnail:focus {
 }
 
 .media-heading {
-  margin: 0 0 5px;
+  margin: 0 0 1px;
+  text-align:right;
+  padding-top: 10px;
 }
 
 .media > .pull-left {
@@ -6156,3 +6207,4 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+

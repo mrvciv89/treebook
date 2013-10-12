@@ -5,7 +5,7 @@ class UserFriendshipsController < ApplicationController
   def index
     @user_friendships = UserFriendshipDecorator.decorate_collection(friendship_association.all)
     respond_with @user_friendships
-end
+  end
 
   def accept
     @user_friendship = current_user.user_friendships.find(params[:id])

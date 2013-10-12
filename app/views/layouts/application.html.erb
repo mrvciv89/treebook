@@ -1,44 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Treebook</title>
+  <title></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-    	<a href="#" class="brand">Treebook</a>
-    	<ul class="nav">
-    		<li><%= link_to "All Statuses", feed_path %></li>
-      </ul>
-      <ul class="nav pull-right">
-        <% if user_signed_in? %>
-        <li><%= link_to 'Friends', user_friendships_path %></li>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <%= link_to "TreeBook", root_path, class: 'brand' %>
+        <ul class="nav">
+          <li><%= link_to "all entries", feed_path %></li>
+        </ul>
+        <ul class="nav pull-right">
+          <% if user_signed_in? %>
+            <li><%= link_to 'friends', user_friendships_path %></li>
             <li><%= link_to current_user.full_name, edit_user_registration_path %></li>
-            <li><%= link_to "Log Out", logout_path %></li>
-        <% else %>
-            <li><%= link_to "Register", register_path %></li>
-            <li><%= link_to "Log in", login_path %></li>
-        <% end %>
-      </ul>
+            <li><%= link_to "log out", logout_path %></li>
+          <% else %>
+            <li><%= link_to "register", register_path %></li>
+            <li><%= link_to "log in", login_path %></li>
+          <% end %>
+
+        </ul>
+      </div>
     </div>
   </div>
-</div>
-<div class="container">
-  <% flash.each do |type, message| %>
-<div class="alert <%= flash_class type %>" >
-<button type="button" class="close" data-dismiss="alert">x</button>
-<%= message %>
-</div>
-<% end %>
-  
-	<%= yield %>
-</div>
+  <div class="container-fluid">
+  <div class="row-fluid">
+    <%= link_to "post a new entry", new_status_path, class: "btn btn-success" %>
+    <div class="row">
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+         <section id="leftframe"><div class="page-header">
+             
+            </div></section>
+         <section id="leftframe"><div class="page-header">
+              <p>math</p>
+            </div></section>
+            <section id="leftframe"><div class="page-header">
+                        <li>
+          <div class="p">
+          <a title="merve civelek" href="#" class="w ajax sf" datedata="2013-1011">merve civelek</a>
+          </div></li>
+            </div></section>
+            <section id="moose"><div class="page-header">
+              <li><a href="#moose">Moose</a></li>
+            </div></section>
+         <section id="leftframe"><div class="page-header">
+             <p>chemistry</p>
+            </div></section>
+        <section id="leftframe"><div class="page-header">
+              <p>physics</p>
+            </div></section>
+            <section id="leftframe"><div class="page-header">
+              <p>philophsy</p>
+            </div></section>
+         <section id="leftframe"><div class="page-header">
+              <p>literature</p>
+            </div></section>
+        <section id="leftframe"><div class="page-header">
+              <p>music</p>
+            </div></section>
+      </div>
+    <div class="span9">
+    <% flash.each do |type, message| %>
+      <div class="alert <%= flash_class type %>">
+        <button class="close" data-dismiss="alert">Ã—</button>
+        <%= message %>
+  </div>
+      </div>
+    <% end %>
 
-
+    <%= yield %>
+<div class="pagination pagination-right">
+  <ul>
+    <li class="active"><a href="#">&laquo;</a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li class="active"><a href="#">2</a></li>
+    <li class="active"><a href="#">3</a></li>
+    <li class="active"><a href="#">4</a></li>
+    <li class="active"><a href="#">»</a></li>
+  </ul>
+</div>
 </body>
+<div id="wrap" class="footer">
+    <p>footer</p>
+  </div>
+</div>
 </html>

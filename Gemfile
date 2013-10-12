@@ -8,6 +8,11 @@ gem 'heroku'
 gem 'state_machine'
 gem 'draper', '~> 1.0'
 gem 'js-routes'
+gem 'paperclip'
+
+group :development do
+	gem 'thin'
+end
 
 group :test do
 	gem 'shoulda'
@@ -20,6 +25,7 @@ end
 
 group :development, :test do
 	gem 'sqlite3'
+	gem 'log_buddy'
 end
 
 group :assets do

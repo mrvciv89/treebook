@@ -9,8 +9,6 @@ class UserTest < ActiveSupport::TestCase
   should have_many(:requested_friends)
   should have_many(:blocked_user_friendships)
   should have_many(:blocked_friends)
-  
-
 
   test "a user should enter a first name" do
     user = User.new
@@ -33,7 +31,7 @@ class UserTest < ActiveSupport::TestCase
   test "a user should have a unique profile name" do
     user = User.new
     user.profile_name = users(:jason).profile_name
-
+    
     assert !user.save
     assert !user.errors[:profile_name].empty?
   end
@@ -41,15 +39,14 @@ class UserTest < ActiveSupport::TestCase
   test "a user should have a profile name without spaces" do
     user = User.new(first_name: 'Jason', last_name: 'Seifer', email: 'jason2@teamtreehouse.com')
     user.password = user.password_confirmation = 'asdfasdf'
-
-    user.profile_name = 'Contains spaces'
+    user.profile_name = "My Profile With Spaces"
 
     assert !user.save
     assert !user.errors[:profile_name].empty?
     assert user.errors[:profile_name].include?("Must be formatted correctly.")
   end
 
-  test "a user should have a profile name" do
+  test "a user can have a correctly formatted profile name" do
     user = User.new(first_name: 'Jason', last_name: 'Seifer', email: 'jason2@teamtreehouse.com')
     user.password = user.password_confirmation = 'asdfasdf'
 
@@ -70,12 +67,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "that calling to_param on a user returns the profile_name" do
-      assert_equal "jasonseifer", users(:jason).to_param
+    assert_equal "jasonseifer", users(:jason).to_param
   end
 
   context "#has_blocked?" do
     should "return true if a user has blocked another user" do
-      assert users(:jason).has_blocked?(users(:blocked_friends))
+      assert users(:jason).has_blocked?(users(:blocked_friend))
     end
 
     should "return false if a user has not blocked another user" do
