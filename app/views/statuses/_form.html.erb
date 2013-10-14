@@ -13,7 +13,6 @@
 
   
   <%= f.input :content, :label => "title", input_html: { rows: 1, class: "input", :maxlength=>"49" } %>
-  <%= f.input :content, :label => "category", :as => :check_boxes, :collection => ["movie", "book", "music", "sport", "famous person", "place"], :group_method => :last %>
   <%= f.input :content, :label => "entry", input_html: { rows: 4, class: 'input-xxlarge' } %>
 
 
