@@ -9,9 +9,9 @@ gem 'state_machine'
 gem 'draper', '~> 1.0'
 gem 'js-routes'
 gem 'paperclip'
+gem 'thin'
 
 group :development do
-	gem 'thin'
 end
 
 group :test do
